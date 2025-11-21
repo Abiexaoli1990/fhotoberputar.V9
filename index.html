@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ABIE XAOLI REAL</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    
+    <style>
+        /* --- CSS STYLING UTAMA --- */
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(150deg, rgb(214, 240, 68), rgb(47, 147, 218));
+            flex-direction: column; 
+            padding-top: 70px; 
+            padding-bottom: 50px; 
+            overflow: hidden; 
+            user-select: none; 
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            position: relative;
+        }
+        
+        /* HEADER dan bagian lain (TIDAK BERUBAH) */
+        
+        #main-header {
+            position: fixed; 
+            top: 0; 
+            width: 100%;
+            display: flex;
+            align-items: center; 
+            justify-content: center; 
+            padding: 10px 0; 
+            z-index: 100; 
+            
+            background-image: 
+                linear-gradient(90deg, #ff4500, #ffa500, #ffff00, #ffa500, #ff4500), 
+                linear-gradient(0deg, #ff69b4, #ffffff, #00ffff); 
+            
+            animation: 
+                fireWaveAnimation 10s linear infinite,
+                headerBgRotate 2s linear infinite, 
+                headerGlow 4s infinite alternate; 
+
+            background-size: 400% auto, 100% 100%; 
+            background-position: 0% center, 0% 0%; 
+
+            font-family: sans-serif;
+            font-size: 1.8rem;
+            font-weight: bold;
+            letter-spacing: 2px; 
+            
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            color: transparent; 
+        }
+        
+        #header-logo-link {
+            display: flex; 
+            align-items: center;
+            justify-content: center;
+            margin-right: 10px; 
+            text-decoration: none; 
+            width: 44px; 
+            height: 44px;
+            border-radius: 50%;
+            overflow: hidden;
+            
+            border: 2px solid transparent; 
+            background-origin: border-box; 
+            background-clip: content-box, border-box;
+            background-image: linear-gradient(to right, #00c6ff, #0072ff); 
+            animation: rotatingGradientBorder 3s linear infinite;
+        }
+
+        @keyframes rotatingGradientBorder {
+            0% { background-image: linear-gradient(0deg, #00c6ff, #92fe9d); }
+            25% { background-image: linear-gradient(90deg, #ff00c6, #ff7200); }
+            50% { background-image: linear-gradient(180deg, #ffff00, #00ff00); }
+            75% { background-image: linear-gradient(270deg, #ff0000, #8a2be2); }
+            100% { background-image: linear-gradient(360deg, #00c6ff, #92fe9d); }
+        }
+
+        #header-logo {
+            width: 40px; 
+            height: 40px;
+            object-fit: cover; 
+            border-radius: 50%;
+            display: block;
+        }
+
+        @keyframes fireWaveAnimation {
+            0% { background-position: 0% center, 0% 0%; } 
+            100% { background-position: 400% center, 0% 0%; }
+        }
+
+        @keyframes headerBgRotate {
+            0% { 
+                background-image: 
+                    linear-gradient(90deg, #ff4500, #ffa500, #ffff00, #ffa500, #ff4500),
+                    linear-gradient(0deg, #ff69b4, #ffffff, #00ffff); 
+            }
+            100% { 
+                background-image: 
+                    linear-gradient(90deg, #ff4500, #ffa500, #ffff00, #ffa500, #ff4500),
+                    linear-gradient(360deg, #ff69b4, #ffffff, #00ffff); 
+            }
+        }
+
+        @keyframes headerGlow {
+            0% { 
+                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3), 
+                            0 0 10px 2px #ff69b4; 
+            }
+            50% { 
+                box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5), 
+                            0 0 20px 5px #ffffff; 
+            }
+            100% { 
+                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3), 
+                            0 0 10px 2px #00ffff; 
+            }
+        }
+
+        /* --- NAVIGASI DROPDOWN BARU --- */
+        .nav-container {
+            position: fixed; 
+            top: 0;
+            right: 0;
+            z-index: 101; 
+            padding: 10px 15px; 
+        }
+
+        .dropdown-toggle {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.8rem;
+            cursor: pointer;
+            text-shadow: 0 0 5px rgba(255, 255, 255, 0.8), 0 0 10px #00bfff;
+            transition: transform 0.2s;
+        }
+
+        .dropdown-toggle:hover {
+            transform: scale(1.1);
+        }
+
+        .dropdown-menu {
+            position: absolute;
+            top: 100%; 
+            right: 15px;
+            background-color: rgba(0, 0, 0, 0.85); 
+            border: 1px solid #00bfff;
+            border-radius: 8px;
+            min-width: 160px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
+            list-style: none;
+            padding: 10px 0;
+            margin-top: 5px;
+            
+            display: none; 
+            opacity: 0;
+            transform: translateY(-10px);
+            transition: opacity 0.3s ease, transform 0.3s ease;
+        }
+
+        .dropdown-menu.show {
+            display: block;
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .dropdown-menu li a {
+            color: #fff;
+            padding: 10px 15px;
+            text-decoration: none;
+            display: block;
+            font-family: sans-serif;
+            font-size: 0.95rem;
+            transition: background-color 0.2s, color 0.2s;
+            border-left: 3px solid transparent; 
+        }
+        
+        /* --- STYLING GRADIENT TEKS (Home, About, Services, Contact) --- */
+        
+        /* Home (Child ke-1) */
+        .dropdown-menu li:nth-child(1) a { 
+            background-image: linear-gradient(45deg, #ff00cc, #3333ff);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            color: transparent; 
+            font-weight: bold;
+            border-image: linear-gradient(90deg, #ff00cc, #3333ff) 1;
+            border-left-width: 3px;
+            border-style: solid;
+        }
+
+        /* About (Child ke-2) */
+        .dropdown-menu li:nth-child(2) a { 
+            background-image: linear-gradient(45deg, #00ff99, #ffff00);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            color: transparent; 
+            font-weight: bold;
+            border-image: linear-gradient(90deg, #00ff99, #ffff00) 1;
+            border-left-width: 3px;
+            border-style: solid;
+        }
+
+        /* Services (Child ke-3) */
+        .dropdown-menu li:nth-child(3) a { 
+            background-image: linear-gradient(45deg, #ff69b4, #00bfff); /* Pink ke Cyan */
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            color: transparent; 
+            font-weight: bold;
+            border-image: linear-gradient(90deg, #ff69b4, #00bfff) 1;
+            border-left-width: 3px;
+            border-style: solid;
+        }
+
+        /* Contact (Child ke-4) */
+        .dropdown-menu li:nth-child(4) a { 
+            background-image: linear-gradient(45deg, #ffd700, #ff4500); /* Emas ke Merah Oranye */
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            color: transparent; 
+            font-weight: bold;
+            border-image: linear-gradient(90deg, #ffd700, #ff4500) 1;
+            border-left-width: 3px;
+            border-style: solid;
+        }
+
+        /* --- GRADIENT UNTUK BACKGROUND HOVER (BODY BOX) --- */
+        
+        /* Hover state untuk Home */
+        .dropdown-menu li:nth-child(1) a:hover {
+            background-image: linear-gradient(to right, #ff00cc22, #3333ff22); 
+            background-color: transparent; 
+            color: #fff; 
+            -webkit-text-fill-color: #fff; 
+            text-shadow: 0 0 5px rgba(255, 0, 204, 0.8);
+            border-image: linear-gradient(90deg, #ff00cc, #3333ff) 1;
+            border-left-width: 3px;
+        }
+        
+        /* Hover state untuk About */
+        .dropdown-menu li:nth-child(2) a:hover {
+            background-image: linear-gradient(to right, #00ff9922, #ffff0022); 
+            background-color: transparent; 
+            color: #fff;
+            -webkit-text-fill-color: #fff;
+            text-shadow: 0 0 5px rgba(0, 255, 153, 0.8);
+            border-image: linear-gradient(90deg, #00ff99, #ffff00) 1;
+            border-left-width: 3px;
+        }
+        
+        /* Hover state untuk Services */
+        .dropdown-menu li:nth-child(3) a:hover {
+            background-image: linear-gradient(to right, #ff69b422, #00bfff22); /* Gradient Pink-Cyan Transparan */
+            background-color: transparent; 
+            color: #fff; 
+            -webkit-text-fill-color: #fff; 
+            text-shadow: 0 0 5px rgba(255, 105, 180, 0.8); /* Glow Pink */
+            border-image: linear-gradient(90deg, #ff69b4, #00bfff) 1;
+            border-left-width: 3px;
+        }
+
+        /* Hover state untuk Contact */
+        .dropdown-menu li:nth-child(4) a:hover {
+            background-image: linear-gradient(to right, #ffd70022, #ff450022); /* Gradient Emas-Merah Transparan */
+            background-color: transparent; 
+            color: #fff; 
+            -webkit-text-fill-color: #fff; 
+            text-shadow: 0 0 5px rgba(255, 215, 0, 0.8); /* Glow Emas */
+            border-image: linear-gradient(90deg, #ffd700, #ff4500) 1;
+            border-left-width: 3px;
+        }
+        
+        /* --- Canvas Effects & Gallery (TIDAK BERUBAH) --- */
+        #rainCanvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; pointer-events: none; }
+        #snowCanvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 2; pointer-events: none; }
+
+        .box { position: relative; width: 160px; height: 240px; transform-style: preserve-3d; max-width: 90vw; transition: transform 0.1s linear; z-index: 10; cursor: grab; }
+        .box:active { cursor: grabbing; }
+        .box.paused { transition: none; }
+        
+        @keyframes rotateBorderGradient {
+            0% { border-image: linear-gradient(0deg, #ff69b4, #ffffff, #00ffff) 1; }
+            100% { border-image: linear-gradient(360deg, #ff69b4, #ffffff, #00ffff) 1; }
+        }
+
+        .box span {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%; transform-origin: center; transform-style: preserve-3d;
+            transform: rotateY(calc(var(--i) * 36deg)) translateZ(360px); 
+            -webkit-box-reflect: below 2px linear-gradient(transparent, transparent, rgba(4, 4, 4, 0.267)); z-index: 5; 
+            border-radius: 0; overflow: hidden; border: 4px solid transparent; animation: rotateBorderGradient 3s linear infinite; 
+            transition: transform 0.3s ease-out, box-shadow 0.2s ease-in-out, border 0.2s ease-in-out;
+        }
+
+        .box span:hover, .box span:focus-within { 
+            transform: rotateY(calc(var(--i) * 36deg)) translateZ(360px) scale(1.1); 
+            animation-play-state: running; box-shadow: 0 0 20px rgba(0, 255, 255, 0.7);
+            border: 4px solid transparent; border-image: linear-gradient(to right, #ff0000, #ffff00, #00ff00) 1; z-index: 999; 
+        }
+        
+        .box span img {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; touch-action: pan-y; cursor: pointer; 
+            border-radius: 0; border: none; animation: none; transition: none; transform: scale(1); 
+        }
+        
+        /* --- Tombol Navigasi Bawah (TIDAK BERUBAH) --- */
+        .button-container {
+            position: fixed; bottom: 0; left: 0; width: 100%; display: flex; justify-content: center; padding: 10px; box-sizing: border-box; gap: 10px; z-index: 10;
+        }
+
+        .nav-button-bottom {
+            flex-grow: 1; padding: 8px 12px; text-decoration: none; border-radius: 10px; text-align: center; font-family: sans-serif; font-weight: bold;
+            transition: transform 0.2s, box-shadow 0.2s, color 0.2s, text-shadow 0.2s, border 0.2s, border-image 0.2s; font-size: 1.2rem; max-width: 110px; 
+            background: linear-gradient(90deg, #007bff, #28a745, #ffffff); box-shadow: 0 0 5px 2px rgba(0, 123, 255, 0.3); 
+            border: 3px solid transparent; animation: borderPulse 3s infinite alternate ease-in-out; 
+        }
+        
+        .nav-button-bottom i { display: block; margin: 0; }
+        #facebook-btn { color: #1877F2; }
+        #facebook-btn i { text-shadow: 0 0 3px #fff, 0 0 8px rgba(24, 119, 242, 0.8); }
+        #twitter-btn { color: #000000; }
+        #twitter-btn i { text-shadow: 0 0 3px #ffffff, 0 0 8px rgba(0, 0, 0, 0.5); }
+        #telegram-btn { color: #0088CC; }
+        #telegram-btn i { text-shadow: 0 0 3px #ffffff, 0 0 8px rgba(0, 136, 204, 0.8); }
+
+        .nav-button-bottom:hover, .nav-button-bottom:focus {
+            transform: translateY(-4px) scale(1.05); box-shadow: 0 0 15px 5px #00bfff, 0 0 25px 8px #ffffff, 0 0 40px 15px #00bfff, 0 8px 30px rgba(47, 147, 218, 0.9); 
+            color: #fff; text-shadow: 0 0 8px #00bfff, 0 0 12px #fff, 0 0 15px #00bfff; border: 3px solid #00bfff; animation-play-state: paused; border-image: none; 
+        }
+
+        @keyframes borderPulse {
+            0% { border-image: linear-gradient(to right, #ff69b4, #ffffff, #00ffff) 1; }
+            33% { border-image: linear-gradient(to right, #00ffff, #ff69b4, #ffffff) 1; }
+            66% { border-image: linear-gradient(to right, #ffffff, #00ffff, #ff69b4) 1; }
+            100% { border-image: linear-gradient(to right, #ff69b4, #ffffff, #00ffff) 1; }
+        }
+
+
+        /* MEDIA QUERY: VERSI MOBILE (TIDAK BERUBAH) */
+        @media screen and (max-width: 600px) {
+            
+            body { padding-top: 60px; padding-bottom: 90px; }
+            #main-header { font-size: 1.4rem; padding: 8px 0; }
+
+            #header-logo-link { margin-right: 5px; width: 34px; height: 34px; }
+            #header-logo { width: 30px; height: 30px; }
+            
+            .nav-container {
+                padding: 5px 10px; 
+            }
+            .dropdown-toggle {
+                font-size: 1.5rem;
+            }
+            .dropdown-menu {
+                right: 10px;
+                min-width: 140px;
+            }
+            
+            .box { width: 95px; height: 200px; }
+            .box span { transform: rotateY(calc(var(--i) * 36deg)) translateZ(180px); border-radius: 0; }
+
+            .box span:hover, .box span:focus-within {
+                transform: rotateY(calc(var(--i) * 36deg)) translateZ(180px) scale(1.1); 
+                box-shadow: 0 0 10px rgba(0, 255, 255, 0.7); border: 2px solid transparent; 
+                border-image: linear-gradient(to right, #ff0000, #ffff00, #00ff00) 1; z-index: 999; 
+            }
+
+            .button-container { bottom: 40px; }
+            .nav-button-bottom { font-size: 1rem; padding: 6px 10px; max-width: 85px; border: 2px solid transparent; }
+            .nav-button-bottom:hover, .nav-button-bottom:focus { border: 2px solid #00bfff; }
+        }
+    </style>
+</head>
+<body>
+
+    <canvas id="rainCanvas"></canvas> 
+    <canvas id="snowCanvas"></canvas>
+    
+    <div id="main-header">
+        <a href="https://example.com" id="header-logo-link" target="_blank"> 
+            <img id="header-logo" src="https://img.freepik.com/vektor-premium/dragon-logo-format-design-very-cool-basic-vector-ink_803054-638.jpg" alt="Logo">
+        </a>
+        ABIE XAOLI REAL
+    </div>
+    
+    <div class="nav-container">
+        <button class="dropdown-toggle" id="dropdown-toggle" aria-expanded="false" aria-controls="dropdown-menu">
+            <i class="fas fa-bars"></i> 
+        </button>
+        <ul class="dropdown-menu" id="dropdown-menu">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </div>
+    <div class="box" id="gallery-box">
+        <span style="--i:1"><img src="https://png.pngtree.com/background/20250109/original/pngtree-cartoon-kids-walking-wallpaper-picture-image_15160714.jpg" alt="Gallery Image 1" tabindex="0"></span>
+        <span style="--i:2"><img src="https://img.freepik.com/foto-gratis/karakter-kartun-3d_23-2151021986.jpg?semt=ais_hybrid&w=740&q=80" alt="Gallery Image 2" tabindex="0"></span>
+        <span style="--i:3"><img src="https://i.pinimg.com/474x/21/35/f0/2135f0dd652c5487bc129558e9d3dada.jpg" alt="Gallery Image 3" tabindex="0"></span>
+        <span style="--i:4"><img src="https://azimages.org/wp-content/uploads/2024/10/Cute-Cartoon-Boy-DP15.jpg" alt="Gallery Image 4" tabindex="0"></span>
+        <span style="--i:5"><img src="https://sadgirldp.com/wp-content/uploads/Cartoon-Boy-DP-Images.jpeg" alt="Gallery Image 5" tabindex="0"></span>
+        <span style="--i:6"><img src="https://azimages.org/wp-content/uploads/2024/10/Cute-Cartoon-Boy-DP17.jpg" alt="Gallery Image 6" tabindex="0"></span>
+        <span style="--i:7"><img src="https://azimages.org/wp-content/uploads/2024/10/Cute-Cartoon-Boy-DP16.jpg" alt="Gallery Image 7" tabindex="0"></span>
+        <span style="--i:8"><img src="https://mewingemoji.com/wp-content/uploads/2024/07/cute-cartoon-dp15-573x1024.jpg" alt="Gallery Image 8" tabindex="0"></span>
+        <span style="--i:9"><img src="https://mewingemoji.com/wp-content/uploads/2024/07/cute-cartoon-dp.jpg" alt="Gallery Image 9" tabindex="0"></span>
+        <span style="--i:10"><img src="https://photosdp.com/wp-content/uploads/2024/04/Cartoon-Girl-Dp-PhotosDp.Com_24.jpg" alt="Gallery Image 10" tabindex="0"></span>
+    </div>
+
+    <div class="button-container">
+        <a href="https://example.com" class="nav-button-bottom" id="twitter-btn"><i class="fa-brands fa-x-twitter"></i></a> 
+        <a href="https://example.com" class="nav-button-bottom" id="telegram-btn"><i class="fa-brands fa-telegram"></i></a>
+        <a href="https://example.com" class="nav-button-bottom" id="facebook-btn"><i class="fa-brands fa-facebook-f"></i></a>
+    </div>
+
+    <script>
+        // --- LOGIKA DROPDOWN NAVIGASI ---
+        const dropdownToggle = document.getElementById('dropdown-toggle');
+        const dropdownMenu = document.getElementById('dropdown-menu');
+
+        dropdownToggle.addEventListener('click', () => {
+            const isVisible = dropdownMenu.classList.toggle('show');
+            dropdownToggle.setAttribute('aria-expanded', isVisible);
+        });
+
+        // Menutup dropdown jika klik di luar area
+        document.addEventListener('click', (e) => {
+            if (!dropdownToggle.contains(e.target) && !dropdownMenu.contains(e.target)) {
+                dropdownMenu.classList.remove('show');
+                dropdownToggle.setAttribute('aria-expanded', 'false');
+            }
+        });
+
+        // --- LOGIKA ROTASI & INTERAKSI (JAVASCRIPT) ---
+        const gallery = document.getElementById('gallery-box');
+        let startX;
+        let currentRotation = 0;
+        let velocity = 0;
+        let animationInterval;
+        let autoRotateInterval; 
+        
+        const sensitivity = 2.5; 
+        const autoRotateSpeed = 0.4; 
+
+        let isDragging = false;
+
+        function startAutoRotate() {
+            if (autoRotateInterval) clearInterval(autoRotateInterval);
+            autoRotateInterval = setInterval(() => {
+                currentRotation += autoRotateSpeed;
+                updateRotation();
+            }, 50); 
+        }
+
+        function pauseRotation() {
+            if (autoRotateInterval) clearInterval(autoRotateInterval);
+            gallery.classList.add('paused');
+            if (animationInterval) clearInterval(animationInterval);
+        }
+
+        function startInertia() {
+            if (autoRotateInterval) clearInterval(autoRotateInterval);
+            if (animationInterval) clearInterval(animationInterval);
+            
+            animationInterval = setInterval(() => {
+                if (Math.abs(velocity) < 0.1) {
+                    clearInterval(animationInterval);
+                    startAutoRotate(); 
+                    return;
+                }
+                
+                currentRotation += velocity;
+                velocity *= 0.92; 
+                updateRotation();
+            }, 30);
+        }
+
+        function updateRotation() {
+            gallery.style.transform = `perspective(1000px) rotateY(${currentRotation}deg)`;
+        }
+
+        // --- Mouse Events ---
+        gallery.addEventListener('mousedown', (e) => {
+            isDragging = true;
+            pauseRotation();
+            startX = e.clientX;
+            gallery.classList.remove('paused');
+            velocity = 0;
+        });
+
+        document.addEventListener('mousemove', (e) => {
+            if (!isDragging) return;
+            
+            const deltaX = e.clientX - startX;
+            velocity = deltaX * 0.05 * sensitivity;
+            currentRotation += velocity;
+            startX = e.clientX;
+            updateRotation();
+        });
+
+        document.addEventListener('mouseup', () => {
+            if (isDragging) {
+                isDragging = false;
+                startInertia();
+            }
+        });
+
+        // --- Touch Events ---
+        gallery.addEventListener('touchstart', (e) => {
+            isDragging = true;
+            pauseRotation();
+            startX = e.touches[0].clientX;
+            gallery.classList.remove('paused');
+            velocity = 0;
+            e.preventDefault(); 
+        }, { passive: false });
+
+        document.addEventListener('touchmove', (e) => {
+            if (!isDragging) return;
+            
+            const deltaX = e.touches[0].clientX - startX;
+            velocity = deltaX * 0.05 * sensitivity;
+            currentRotation += velocity;
+            startX = e.touches[0].clientX;
+            updateRotation();
+            e.preventDefault(); 
+        }, { passive: false });
+
+        document.addEventListener('touchend', () => {
+            if (isDragging) {
+                isDragging = false;
+                startInertia();
+            }
+        });
+
+        startAutoRotate();
+
+
+        // --- LOGIKA EFEK HUJAN (JAVASCRIPT) ---
+        const rainCanvas = document.getElementById('rainCanvas');
+        const rainCtx = rainCanvas.getContext('2d');
+        let width, height;
+        const drops = [];
+        const maxDrops = 100;
+
+        function resizeCanvas() {
+            width = window.innerWidth;
+            height = window.innerHeight;
+            rainCanvas.width = width;
+            rainCanvas.height = height;
+            snowCanvas.width = width;
+            snowCanvas.height = height;
+        }
+
+        class Drop {
+            constructor() {
+                this.reset();
+                this.z = Math.random() * 20 + 1;
+                this.len = this.z;
+            }
+
+            reset() {
+                this.x = Math.random() * width;
+                this.y = Math.random() * height * 0.2 - 100;
+                this.speedY = this.z * 0.4 + 5;
+                this.alpha = 0.5 + Math.random() * 0.5;
+                this.len = this.z * 2;
+                this.vy = this.speedY; 
+            }
+
+            fall() {
+                this.y += this.vy;
+                this.vy += 0.05; 
+
+                if (this.y > height) {
+                    this.reset();
+                }
+            }
+
+            draw() {
+                rainCtx.beginPath();
+                rainCtx.strokeStyle = `rgba(255, 255, 255, ${this.alpha * 0.5})`;
+                rainCtx.lineWidth = 1;
+                rainCtx.moveTo(this.x, this.y);
+                rainCtx.lineTo(this.x, this.y + this.len);
+                rainCtx.stroke();
+            }
+        }
+
+        function initRain() {
+            drops.length = 0;
+            for (let i = 0; i < maxDrops; i++) {
+                drops.push(new Drop());
+            }
+        }
+
+        function animateRain() {
+            rainCtx.clearRect(0, 0, width, height);
+
+            for (let i = 0; i < drops.length; i++) {
+                drops[i].fall();
+                drops[i].draw();
+            }
+
+            requestAnimationFrame(animateRain);
+        }
+
+        // --- LOGIKA EFEK SALJU (JAVASCRIPT) ---
+        const snowCanvas = document.getElementById('snowCanvas');
+        const snowCtx = snowCanvas.getContext('2d');
+        const snowflakes = [];
+        const maxSnowflakes = 150; 
+
+        class Snowflake {
+            constructor() {
+                this.reset();
+                this.radius = Math.random() * 2 + 0.5; 
+                this.alpha = 0.5 + Math.random() * 0.5;
+                this.speedX = Math.random() * 1.5 - 0.75; 
+                this.angle = Math.random() * 2 * Math.PI; 
+                this.sinSpeed = Math.random() * 0.05 + 0.01;
+            }
+
+            reset() {
+                this.x = Math.random() * width;
+                this.y = Math.random() * height * 0.2 - 100;
+                this.speedY = Math.random() * 1 + 0.5; 
+            }
+
+            fall() {
+                this.y += this.speedY;
+                this.x += Math.cos(this.angle) * this.speedX * 0.5; 
+                this.angle += this.sinSpeed;
+
+                if (this.y > height || this.x < 0 || this.x > width) {
+                    this.reset();
+                }
+            }
+
+            draw() {
+                snowCtx.beginPath();
+                snowCtx.arc(this.x, this.y, this.radius, 0, 2 * Math.PI);
+                snowCtx.fillStyle = `rgba(255, 255, 255, ${this.alpha})`;
+                snowCtx.fill();
+            }
+        }
+
+        function initSnow() {
+            snowflakes.length = 0;
+            for (let i = 0; i < maxSnowflakes; i++) {
+                snowflakes.push(new Snowflake());
+            }
+        }
+
+        function animateSnow() {
+            snowCtx.clearRect(0, 0, width, height); 
+
+            for (let i = 0; i < snowflakes.length; i++) {
+                snowflakes[i].fall();
+                snowflakes[i].draw();
+            }
+
+            requestAnimationFrame(animateSnow);
+        }
+
+
+        // Panggil saat dimuat dan diubah ukurannya
+        window.addEventListener('resize', () => {
+            resizeCanvas();
+            initRain();
+            initSnow(); 
+        });
+
+        resizeCanvas();
+        initRain();
+        initSnow(); 
+        animateRain();
+        animateSnow(); 
+
+    </script>
+
+</body>
+</html>
